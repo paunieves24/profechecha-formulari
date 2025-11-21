@@ -127,28 +127,19 @@
 
       <div style="display:flex;gap:12px;align-items:center;">
         <button class="btn" type="submit">Envia resposta</button>
-        <div class="small">Aquest formulari envia dades a un endpoint extern si l'admin ho configura (Formspree / Netlify Forms / Google Apps Script).</div>
+        <div class="small">Aquest formulari envia dades a Formspree.</div>
       </div>
 
       <div id="message" aria-live="polite"></div>
     </form>
 
     <footer>
-      <p>Instruccions ràpides:</p>
-      <ol>
-        <li>Per rebre respostes per email sense servidor: crea un formulari a <strong>Formspree</strong> i substitueix l'URL dins del codi JavaScript per la teva URL de Formspree.</li>
-        <li>Si prefereixes guardar respostes a un Google Sheet, usa Google Apps Script o una solució com <em>Sheet.best</em> / <em>sheetson</em> i canvia l'endpoint.</li>
-        <li>Per publicar: penja aquest fitxer a GitHub Pages, Netlify o qualsevol hosting estàtic. </li>
-      </ol>
+      <p>Formulari connectat a <strong>Formspree</strong>.</p>
     </footer>
   </div>
 
 <script>
-/*
-  Per defecte l'enviament fa POST a un endpoint de tercers.
-  Substitueix 'FORM_ENDPOINT' per l'URL que et faciliti Formspree o Netlify Forms.
-*/
-const FORM_ENDPOINT = "https://formspree.io/f/yourFormID"; // <-- CANVIA AQUI
+const FORM_ENDPOINT = "https://formspree.io/f/xwpygary";
 
 const form = document.getElementById('profeForm');
 const messageBox = document.getElementById('message');
@@ -156,63 +147,27 @@ const messageBox = document.getElementById('message');
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   messageBox.innerHTML = '';
+
   const data = new FormData(form);
-  // Guarda també a localStorage per còpia local (no comparteix amb el servidor)
-  const obj = {};
-  data.forEach((v,k) => obj[k]=v);
-  const saved = JSON.parse(localStorage.getItem('profechecha_resps') || '[]');
-  saved.push({...obj, _ts: new Date().toISOString()});
-  localStorage.setItem('profechecha_resps', JSON.stringify(saved));
 
-  // Intentem enviar al FORM_ENDPOINT si està canviat
-  if (!FORM_ENDPOINT.includes("yourFormID")) {
-    try {
-      const resp = await fetch(FORM_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: data
-      });
-      if (resp.ok) {
-        messageBox.innerHTML = '<div class="success">Gràcies! La teva resposta s'ha enviat correctament.</div>';
-        form.reset();
-        return;
-      } else {
-        const text = await resp.text();
-        console.warn('Form endpoint error', text);
-      }
-    } catch (err) {
-      console.warn('Enviament fallit', err);
+  try {
+    const resp = await fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: data
+    });
+
+    if (resp.ok) {
+      messageBox.innerHTML = '<div class="success">Gràcies! La teva resposta s\'ha enviat correctament.</div>';
+      form.reset();
+    } else {
+      messageBox.innerHTML = '<div class="success">Error enviant les dades. Si us plau, intenta-ho més tard.</div>';
     }
+  } catch (err) {
+    messageBox.innerHTML = '<div class="success">Error de connexió. Torna-ho a intentar.</div>';
   }
-
-  // Si no hi ha endpoint configurat o l'enviament falla, mostra missatge i ofereix descarregar CSV
-  messageBox.innerHTML = '<div class="success">Resposta registrada localment. Si vols recollir respostes centralitzades, configura un endpoint (veure instruccions).</div>';
-  showDownloadLink();
 });
-
-function showDownloadLink(){
-  const saved = JSON.parse(localStorage.getItem('profechecha_resps') || '[]');
-  if(!saved.length) return;
-  // Genera CSV
-  const keys = Object.keys(saved[0]);
-  const rows = saved.map(r => keys.map(k => JSON.stringify(r[k]||"")).join(','));
-  const csv = [keys.join(','), ...rows].join('\n');
-  const blob = new Blob([csv], {type: 'text/csv'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'respostes_profechecha.csv';
-  a.textContent = 'Descarregar respostes (CSV)';
-  a.style.display = 'inline-block';
-  a.style.marginTop = '12px';
-  const existing = document.getElementById('dlcsv');
-  if(existing) existing.remove();
-  a.id = 'dlcsv';
-  messageBox.appendChild(a);
-}
-
-// Mostrar en carregar si ja hi ha respostes locals
-showDownloadLink();
 </script>
+
 </body>
 </html>
