@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Qüestionari d'avaluació - Profechecha</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;margin:0;padding:20px;background:#f7f7fb;color:#111;}
+    .container{max-width:800px;margin:0 auto;background:white;padding:24px;border-radius:8px;box-shadow:0 6px 18px rgba(20,20,50,0.08)}
+    h1{margin-top:0}
+    label{display:block;margin-top:12px;font-weight:600}
+    input[type="text"], textarea, select{width:100%;padding:10px;border:1px solid #d6d6e0;border-radius:6px;margin-top:6px;box-sizing:border-box}
+    .row{display:flex;gap:12px;flex-wrap:wrap}
+    .col{flex:1 1 220px}
+    .options{margin-top:8px}
+    .options label{display:block;font-weight:400;margin:6px 0}
+    .btn{display:inline-block;padding:10px 16px;border-radius:8px;border:0;background:#2b6bff;color:white;font-weight:600;cursor:pointer;margin-top:18px}
+    .muted{color:#666;font-size:0.95rem;margin-top:6px}
+    .success{background:#e6ffef;border:1px solid #b9f0c7;padding:12px;border-radius:6px;margin-top:12px;color:#064e2a}
+    footer{margin-top:18px;font-size:0.9rem;color:#555}
+    .scale{display:flex;gap:8px;align-items:center;margin-top:8px}
+    .scale input{margin-right:6px}
+    .small{font-size:0.9rem;color:#444}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Qüestionari d’avaluació de l’assistent educatiu Profechecha</h1>
+    <p class="muted">Aquest qüestionari té com a objectiu recollir opinions sobre l’ús de l’assistent Profechecha. Les respostes ens ajudaran a millorar l’eina i valorar la seva utilitat pedagògica.</p>
+
+    <form id="profeForm">
+      <label>1. Nom i cognoms (opcional)
+        <input type="text" name="nom" placeholder="Nom i cognoms">
+      </label>
+
+      <label>2. Assignatura que imparteixes
+        <input type="text" name="assignatura" required placeholder="Ex. Matemàtiques">
+      </label>
+
+      <label>3. Nivell educatiu (ESO, Batxillerat, FP...)
+        <input type="text" name="nivell" required placeholder="Ex. ESO">
+      </label>
+
+      <label>4. Has pogut accedir fàcilment a l'assistent des de la pàgina web?
+        <div class="options">
+          <label><input type="radio" name="acces" value="Sí" required> Sí</label>
+          <label><input type="radio" name="acces" value="No"> No</label>
+        </div>
+      </label>
+
+      <label>5. L'assistent respon en l'idioma que necessites (català/castellà)?
+        <div class="options">
+          <label><input type="radio" name="idioma" value="Sempre" required> Sempre</label>
+          <label><input type="radio" name="idioma" value="Algunes vegades"> Algunes vegades</label>
+          <label><input type="radio" name="idioma" value="Mai"> Mai</label>
+        </div>
+      </label>
+
+      <label>6. Les respostes de l'assistent són clares i entenedores?
+        <div class="options">
+          <label><input type="radio" name="clares" value="Molt clares" required> Molt clares</label>
+          <label><input type="radio" name="clares" value="Acceptables"> Acceptables</label>
+          <label><input type="radio" name="clares" value="Poc clares"> Poc clares</label>
+        </div>
+      </label>
+
+      <label>7. Creus que l'assistent pot ajudar a preparar plans de classe?
+        <div class="options">
+          <label><input type="radio" name="plans" value="Sí, molt" required> Sí, molt</label>
+          <label><input type="radio" name="plans" value="Una mica"> Una mica</label>
+          <label><input type="radio" name="plans" value="No"> No</label>
+        </div>
+      </label>
+
+      <label>8. Les activitats proposades són adequades per al teu nivell d'alumnes?
+        <div class="options">
+          <label><input type="radio" name="activitats" value="Sí" required> Sí</label>
+          <label><input type="radio" name="activitats" value="Algunes sí, altres no"> Algunes sí, altres no</label>
+          <label><input type="radio" name="activitats" value="No"> No</label>
+        </div>
+      </label>
+
+      <label>9. L'assistent t'ha aportat idees noves que no havies pensat?
+        <div class="options">
+          <label><input type="radio" name="idees" value="Sí" required> Sí</label>
+          <label><input type="radio" name="idees" value="Algunes"> Algunes</label>
+          <label><input type="radio" name="idees" value="No"> No</label>
+        </div>
+      </label>
+
+      <label>10. Com valores la facilitat d'ús de la pàgina web?
+        <div class="options">
+          <label><input type="radio" name="facilitat" value="Molt fàcil" required> Molt fàcil</label>
+          <label><input type="radio" name="facilitat" value="Acceptable"> Acceptable</label>
+          <label><input type="radio" name="facilitat" value="Difícil"> Difícil</label>
+        </div>
+      </label>
+
+      <label>11. El disseny de la pàgina és:
+        <div class="options">
+          <label><input type="radio" name="disseny" value="Atractiu i professional" required> Atractiu i professional</label>
+          <label><input type="radio" name="disseny" value="Correcte però millorable"> Correcte però millorable</label>
+          <label><input type="radio" name="disseny" value="Poc atractiu"> Poc atractiu</label>
+        </div>
+      </label>
+
+      <label>12. En una escala de 1 a 5, com valores l'eina Profechecha?
+        <div class="scale" role="radiogroup" aria-label="Valoració 1-5">
+          <label><input type="radio" name="valoracio" value="1" required>1</label>
+          <label><input type="radio" name="valoracio" value="2">2</label>
+          <label><input type="radio" name="valoracio" value="3">3</label>
+          <label><input type="radio" name="valoracio" value="4">4</label>
+          <label><input type="radio" name="valoracio" value="5">5</label>
+        </div>
+      </label>
+
+      <label>13. Quins aspectes milloraries?
+        <textarea name="millorar" rows="4" placeholder="Digues què milloraries..." required></textarea>
+      </label>
+
+      <label>14. Recomanaries l'ús de l'assistent a altres professors?
+        <div class="options">
+          <label><input type="radio" name="recomanar" value="Sí" required> Sí</label>
+          <label><input type="radio" name="recomanar" value="No"> No</label>
+        </div>
+      </label>
+
+      <div style="display:flex;gap:12px;align-items:center;">
+        <button class="btn" type="submit">Envia resposta</button>
+        <div class="small">Aquest formulari envia dades a un endpoint extern si l'admin ho configura (Formspree / Netlify Forms / Google Apps Script).</div>
+      </div>
+
+      <div id="message" aria-live="polite"></div>
+    </form>
+
+    <footer>
+      <p>Instruccions ràpides:</p>
+      <ol>
+        <li>Per rebre respostes per email sense servidor: crea un formulari a <strong>Formspree</strong> i substitueix l'URL dins del codi JavaScript per la teva URL de Formspree.</li>
+        <li>Si prefereixes guardar respostes a un Google Sheet, usa Google Apps Script o una solució com <em>Sheet.best</em> / <em>sheetson</em> i canvia l'endpoint.</li>
+        <li>Per publicar: penja aquest fitxer a GitHub Pages, Netlify o qualsevol hosting estàtic. </li>
+      </ol>
+    </footer>
+  </div>
+
+<script>
+/*
+  Per defecte l'enviament fa POST a un endpoint de tercers.
+  Substitueix 'FORM_ENDPOINT' per l'URL que et faciliti Formspree o Netlify Forms.
+*/
+const FORM_ENDPOINT = "https://formspree.io/f/yourFormID"; // <-- CANVIA AQUI
+
+const form = document.getElementById('profeForm');
+const messageBox = document.getElementById('message');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  messageBox.innerHTML = '';
+  const data = new FormData(form);
+  // Guarda també a localStorage per còpia local (no comparteix amb el servidor)
+  const obj = {};
+  data.forEach((v,k) => obj[k]=v);
+  const saved = JSON.parse(localStorage.getItem('profechecha_resps') || '[]');
+  saved.push({...obj, _ts: new Date().toISOString()});
+  localStorage.setItem('profechecha_resps', JSON.stringify(saved));
+
+  // Intentem enviar al FORM_ENDPOINT si està canviat
+  if (!FORM_ENDPOINT.includes("yourFormID")) {
+    try {
+      const resp = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: data
+      });
+      if (resp.ok) {
+        messageBox.innerHTML = '<div class="success">Gràcies! La teva resposta s'ha enviat correctament.</div>';
+        form.reset();
+        return;
+      } else {
+        const text = await resp.text();
+        console.warn('Form endpoint error', text);
+      }
+    } catch (err) {
+      console.warn('Enviament fallit', err);
+    }
+  }
+
+  // Si no hi ha endpoint configurat o l'enviament falla, mostra missatge i ofereix descarregar CSV
+  messageBox.innerHTML = '<div class="success">Resposta registrada localment. Si vols recollir respostes centralitzades, configura un endpoint (veure instruccions).</div>';
+  showDownloadLink();
+});
+
+function showDownloadLink(){
+  const saved = JSON.parse(localStorage.getItem('profechecha_resps') || '[]');
+  if(!saved.length) return;
+  // Genera CSV
+  const keys = Object.keys(saved[0]);
+  const rows = saved.map(r => keys.map(k => JSON.stringify(r[k]||"")).join(','));
+  const csv = [keys.join(','), ...rows].join('\n');
+  const blob = new Blob([csv], {type: 'text/csv'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'respostes_profechecha.csv';
+  a.textContent = 'Descarregar respostes (CSV)';
+  a.style.display = 'inline-block';
+  a.style.marginTop = '12px';
+  const existing = document.getElementById('dlcsv');
+  if(existing) existing.remove();
+  a.id = 'dlcsv';
+  messageBox.appendChild(a);
+}
+
+// Mostrar en carregar si ja hi ha respostes locals
+showDownloadLink();
+</script>
+</body>
+</html>
